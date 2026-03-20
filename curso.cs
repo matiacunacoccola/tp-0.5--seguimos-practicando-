@@ -4,9 +4,17 @@ public class Curso
 
 
     public void AgregarAlumno(Alumno alumno)
+{
+    if (BuscarAlumno(alumno.DNI) == null)
     {
         alumnos.Add(alumno);
+        Console.WriteLine("Alumno agregado correctamente.");
     }
+    else
+    {
+        Console.WriteLine("Error. ya existe un alumno con ese DNI.");
+    }
+}
 
 
     public Alumno BuscarAlumno(int dni)
