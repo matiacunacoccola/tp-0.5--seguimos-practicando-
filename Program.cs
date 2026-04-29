@@ -20,45 +20,29 @@ class Program
             switch (opcion)
             {
                 case 1:
-                    Console.Write("DNI del alumno a agregar: ");
-                    int dni = int.Parse(Console.ReadLine());
-
-                    Console.Write("Nombre: ");
-                    string nombre = Console.ReadLine();
+                    int dni = PedirInt("DNI del alumno a agregar: ");
+                    string nombre = PedirString("Nombre: ");
 
                     Alumno nuevo = new Alumno(dni, nombre);
                     curso.AgregarAlumno(nuevo);
                     break;
 
                 case 2:
-                    Console.Write("DNI a buscar: ");
-                    int dniBuscar = int.Parse(Console.ReadLine());
+                    int dniBuscar = PedirInt("DNI a buscar: ");
 
                     Alumno encontrado = curso.BuscarAlumno(dniBuscar);
 
                     if (encontrado != null)
-                        encontrado.Mostrar();
+                        Console.WriteLine(encontrado.Mostrar());
                     else
                         Console.WriteLine("No encontrado");
                     break;
 
                 case 3:
-                    Console.Write("DNI: ");
-                    int dniFalta = int.Parse(Console.ReadLine());
+                    int dniFalta = PedirInt("DNI: ");
+                    double falta = PedirDouble("Ingrese falta (1 o 0.5): ");
 
-                    Alumno alumno = curso.BuscarAlumno(dniFalta);
-
-                    if (alumno != null)
-                    {
-                        Console.Write("Ingrese falta (1 o 0.5): ");
-                        double falta = double.Parse(Console.ReadLine());
-
-                        alumno.AgregarFalta(falta);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Alumno no encontrado");
-                    }
+                    curso.AgregarFalta(dniFalta, falta);
                     break;
 
                 case 4:
@@ -72,7 +56,23 @@ class Program
 
         } while (opcion != 0);
     }
+
+
+    static int PedirInt(string mensaje)
+    {
+        Console.Write(mensaje);
+        return int.Parse(Console.ReadLine());
+    }
+
+    static string PedirString(string mensaje)
+    {
+        Console.Write(mensaje);
+        return Console.ReadLine();
+    }
+
+    static double PedirDouble(string mensaje)
+    {
+        Console.Write(mensaje);
+        return double.Parse(Console.ReadLine());
+    }
 }
-
-
-

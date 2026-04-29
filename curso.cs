@@ -1,14 +1,12 @@
 public class Curso
 {
-      public Dictionary<int, Alumno> alumnos = new Dictionary<int, Alumno>();
+    private Dictionary<int, Alumno> alumnos = new Dictionary<int, Alumno>();
 
     public void AgregarAlumno(Alumno alumno)
     {
-    
-        if (!alumnos.ContainsKey(alumno.DNI))
+        if (!alumnos.ContainsKey(alumno.GetDNI()))
         {
-           
-            alumnos.Add(alumno.DNI, alumno); 
+            alumnos.Add(alumno.GetDNI(), alumno);
             Console.WriteLine("Alumno agregado correctamente.");
         }
         else
@@ -19,17 +17,32 @@ public class Curso
 
     public Alumno BuscarAlumno(int dni)
     {
-      
         if (alumnos.ContainsKey(dni))
-            return alumnos[dni]; 
+            return alumnos[dni];
+
         return null;
+    }
+
+    
+    public void AgregarFalta(int dni, double falta)
+    {
+        Alumno alumno = BuscarAlumno(dni);
+
+        if (alumno != null)
+        {
+            alumno.AgregarFalta(falta);
+        }
+        else
+        {
+            Console.WriteLine("Alumno no encontrado");
+        }
     }
 
     public void MostrarAlumnos()
     {
-          foreach (Alumno a in alumnos.Values)
+        foreach (Alumno a in alumnos.Values)
         {
-            a.Mostrar();
+            Console.WriteLine(a.Mostrar());
         }
     }
 
@@ -37,9 +50,9 @@ public class Curso
     {
         foreach (Alumno a in alumnos.Values)
         {
-            if (a.CantidadFaltas > 15)
+            if (a.GetFaltas() > 15)
             {
-                a.Mostrar();
+                Console.WriteLine(a.Mostrar());
             }
         }
     }

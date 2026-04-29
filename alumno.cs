@@ -1,23 +1,29 @@
 public class Alumno
 {
-    public int DNI=0;
-    public string Nombre="";
-    public double CantidadFaltas=0;
+    private int dni;
+    private string nombre;
+    private double cantidadFaltas;
 
     public Alumno(int dni, string nombre)
     {
-        DNI = dni;
-        Nombre = nombre;
-        CantidadFaltas = 0;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.cantidadFaltas = 0;
     }
 
     public void AgregarFalta(double falta)
     {
-        CantidadFaltas += falta;
+        cantidadFaltas += falta;
     }
 
-    public void Mostrar()
+ 
+    public int GetDNI() { return dni; }
+    public string GetNombre() { return nombre; }
+    public double GetFaltas() { return cantidadFaltas; }
+
+   
+    public string Mostrar()
     {
-        Console.WriteLine("DNI: " + DNI + "- Nombre: " + Nombre + "- Faltas: " + CantidadFaltas);
+        return "DNI: " + dni + " - Nombre: " + nombre + " - Faltas: " + cantidadFaltas;
     }
 }
